@@ -1,5 +1,6 @@
 ---
 title: Monolith
+layout: slide
 ---
 
 
