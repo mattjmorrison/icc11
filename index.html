@@ -3,24 +3,43 @@ layout: default
 ---
 
 <div class="reveal">
-    {% assign sorted_pages = site.posts | sort:"name" %}
     <div class="slides">
+    {% assign sorted_pages = site.pages | sort:"url" %}
     {% for slide in sorted_pages %}
-        <section>
-            {{ slide.content }}
-        </section>
+        {% if slide.layout == 'slide' %}
+            {% assign group = slide.url | split:"/" %}
+            {% for item in group limit:1 offset:2 %}{% assign page = item %}{% endfor %}
+            {% unless prev_page %}<section>{% endunless %}
+            {% if prev_page and page != prev_page %} </section><section> {% endif %}
+            <section class="{{ page }}"> {{ slide.content | markdownify }}<div class="time"></div> </section>
+            {% assign prev_page = page %}
+        {% endif %}
+        {% if forloop.last %} </section> {% endif %}
     {% endfor %}
     </div>
 </div>
 
-<script type="text/javascript" src="/assets/js/reveal.min.js"></script>
+
+<script type="text/javascript" src="assets/js/reveal.min.js"></script>
 <script type="text/javascript">
 Reveal.initialize({
-    controls: true,
-    progress: true,
-    history: true,
-    center: true
+  controls: false,
+  progress: true,
+  history: true,
+  center: true
 });
+
+(function(window){
+  var showTime = function(){
+    var now = new Date();
+    var hours = now.getHours();
+    var _minutes = now.getMinutes();
+    var minutes = (_minutes < 10 ? "0" : "") + _minutes;
+    Array.prototype.forEach.call(document.getElementsByClassName('time'), function(elem){
+      elem.innerHTML = hours + ":" + minutes;
+    });
+  };
+  window.setInterval(showTime, 1000);
+  showTime();
+})(this);
 </script>
-
-

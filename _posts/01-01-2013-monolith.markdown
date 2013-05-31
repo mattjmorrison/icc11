@@ -1,6 +1,0 @@
----
-title: Monolith
----
-
-
-There is a Monolith

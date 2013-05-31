@@ -1,0 +1,14 @@
+
+This is the slide deck for my "Constantly Start Over, Never Rewrite"
+talk for Iowa Code Camp 11.
+
+This uses Jekyll to render a static html page that contains all of
+the slides. The slides are done using reveal.js.
+
+index.html takes care of wiring together the Jekyll pages with reveal.js.
+
+The pages are ordered by name (so all start with a 2 digit number) and
+grouped by name also (minus the leading 2 digit number and file extension).
+
+Each 'group' of slides will using reveal.js's horizontal transition and the
+slides within a group will use vertical transitions.
